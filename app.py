@@ -1,31 +1,68 @@
 import streamlit as st
-import datetime
+from datetime import datetime, date
 
-list_of_tasks = ""
+# Initialize session state for tasks
+if 'tasks' not in st.session_state:
+    st.session_state.tasks = []
 
-st.title("Task Manager Project")
+# Helper function to add a new task
+def add_task(description, due_date):
+    task = {
+        'description': description,
+        'due_date': due_date,
+        'completed': False
+    }
+    st.session_state.tasks.append(task)
 
-st.write("Welcome to the Task Manager Program.")
+# Helper function to delete a task
+def delete_task(index):
+    del st.session_state.tasks[index]
 
-name_of_task = st.text_input("Write the name of the task that needs to be performed here:")
-date_task_due = st.date_input("The date that the task must be performed by:")
-add_task = st.button("Add task to the list of required tasks")
-remove_task = st.button("Cick this to remove a task from the task manager")
-kill_task_manager = st.button("Click this to end the program")
+# Helper function to mark task as complete/incomplete
+def toggle_task_status(index):
+    st.session_state.tasks[index]['completed'] = not st.session_state.tasks[index]['completed']
 
-st.write("Tasks To Do:")
+# Streamlit app title
+st.title("Task Manager")
 
-loop = True
+# Task input section
+st.subheader("Add New Task")
+description = st.text_input("Task Description")
+due_date = st.date_input("Due Date", min_value=date.today())
 
-while(loop == True):
+if st.button("Add Task"):
+    if description.strip() == "":
+        st.error("Task description cannot be empty.")
+    else:
+        add_task(description, due_date)
+        st.success("Task added successfully!")
 
-  if (add_task == True):
-    list_of_tasks += name_of_task + " is due on " + date_task_due.strftime('%m/%d/%Y') + "\n"
-    st.write(list_of_tasks)
-    add_task = False
-    
-  #if (remove_task == True):
-    
-  if (kill_task_manager == True):
-    loop == False
-    
+# Task list section
+st.subheader("Tasks List")
+
+if st.session_state.tasks:
+    for index, task in enumerate(st.session_state.tasks):
+        task_text = f"**{task['description']}** (Due: {task['due_date']})"
+        task_status = "Completed" if task['completed'] else "Incomplete"
+
+        col1, col2, col3 = st.columns([6, 2, 2])
+        
+        # Display task description and status
+        with col1:
+            st.write(f"{task_text} - {task_status}")
+
+        # Mark task as complete/incomplete
+        with col2:
+            if st.button(f"Toggle Status", key=f"toggle_{index}"):
+                toggle_task_status(index)
+        
+        # Delete task
+        with col3:
+            if st.button("Delete", key=f"delete_{index}"):
+                delete_task(index)
+                st.experimental_rerun()
+else:
+    st.write("No tasks available.")
+
+# Display the task count
+st.write(f"Total tasks: {len(st.session_state.tasks)}")
