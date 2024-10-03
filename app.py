@@ -22,6 +22,7 @@ while(loop == True):
   if (add_task == True):
     list_of_tasks += name_of_task + " is due on " + date_task_due.strftime('%m/%d/%Y') + "\n"
     st.write(list_of_tasks)
+    add_task = False
     
   #if (remove_task == True):
     
