@@ -1,4 +1,5 @@
 import streamlit as st
+import datetime
 
 list_of_tasks = ""
 
@@ -15,6 +16,6 @@ kill_task_manager = st.button("Click this to end the program")
 st.write("Tasks To Do:")
 
 if (add_task == True):
-  list_of_tasks += name_of_task + " is due on " + date_task_due + "\n"
+  list_of_tasks += name_of_task + " is due on " + date_task_due.strftime('%m/%d/%Y') + "\n"
 st.write(list_of_tasks)
 #if (remove_task == True):
