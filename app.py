@@ -37,6 +37,8 @@ if st.button("Add Task"):
         add_task(description, due_date)
         st.success("Task added successfully!")
 
+    st.experimental_rerun()
+
 # Task list section
 st.subheader("Tasks List")
 
@@ -55,6 +57,7 @@ if st.session_state.tasks:
         with col2:
             if st.button(f"Toggle Status", key=f"toggle_{index}"):
                 toggle_task_status(index)
+                st.experimental_rerun()
         
         # Delete task
         with col3:
