@@ -1,5 +1,7 @@
 import streamlit as st
 
+list_of_tasks = ""
+
 st.title("Task Manager Project")
 
 st.write("Welcome to the Task Manager Program.")
