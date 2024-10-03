@@ -1,6 +1,15 @@
 import streamlit as st
 from datetime import datetime, date
 
+# Task Manager Project
+# 
+# Authors: Nick Bloor and Stephen Goddard
+#
+# Version 1.0.0
+#
+# Date Last Modified: 2 October 2024
+
+
 # Initialize session state for tasks
 if 'tasks' not in st.session_state:
     st.session_state.tasks = []
