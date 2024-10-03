@@ -43,7 +43,7 @@ st.subheader("Tasks List")
 if st.session_state.tasks:
     for index, task in enumerate(st.session_state.tasks):
         task_text = f"**{task['description']}** (Due: {task['due_date']})"
-        task_status = "Completed" if task['completed'] else 
+        task_status = "Completed" if task['completed'] else "Not Completed"
 
         col1, col2, col3 = st.columns([6, 2, 2])
         
