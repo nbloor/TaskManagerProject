@@ -41,7 +41,7 @@ if st.button("Add Task"):
 st.subheader("Tasks List")
 
 if st.session_state.tasks:
-    for index-1, task in enumerate(st.session_state.tasks):
+    for index, task in enumerate(st.session_state.tasks):
         task_text = f"**{task['description']}** (Due: {task['due_date']})"
         task_status = "Completed" if task['completed'] else "Incomplete"
 
