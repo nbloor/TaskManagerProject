@@ -12,5 +12,6 @@ kill_task_manager = st.button("Click this to end the program")
 
 st.write("Tasks To Do:")
 
-if (is_clicked == True):
-  st.write("Button is Clicked")
+if (add_task == True):
+  st.write(name_of_task, " is due on " , date_task_due)
+#if (remove_task == True):
